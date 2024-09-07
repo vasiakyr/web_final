@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Announcements</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
     <style>
-        :root {
-            --purple: #45083adf; /* Purple color */
-            --background: linear-gradient(var(--purple), #000000); /* Background gradient */
-        }
-
         /* General styling for body */
         body {
             width: 100%;
@@ -18,17 +14,15 @@
             grid-template-columns: 4.5rem 1fr;
             margin: 0;
             color: white;
-            background: var(--background); /* Full screen purple gradient background */
-            min-height: 100vh; /* Ensure the background covers the full height */
+            background: linear-gradient(#45083adf, #000000); /* Background gradient */
         }
 
-        /* Ensure the background covers the full screen */
+        /* Background styling */
         .bg {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background: var(--background);
-            min-height: 100vh;
+            background: linear-gradient(#45083adf, #000000);
         }
 
         /* Styling for the navigation */
@@ -36,7 +30,7 @@
             position: sticky;
             top: 0;
             height: 100vh;
-            background: var(--purple); /* Purple background for nav */
+            background: #000000; /* Dark background for nav */
             backdrop-filter: blur(2rem);
             display: flex;
             flex-direction: column;
@@ -69,7 +63,7 @@
         }
 
         nav > a:hover {
-            background: var(--purple); /* Hover effect color */
+            background: #45083adf; /* Hover effect color */
         }
 
         nav > a:hover:after,
@@ -85,8 +79,8 @@
         /* Styling for the news bar */
         .news-bar {
             position: relative;
-            background-color: var(--purple); /* Purple background */
-            border: 1px solid #ccc; /* Light grey border */
+            background-color: #45083adf; /* Background matching the gradient */
+            border: 1px solid #45083adf; /* Match the purple color */
             border-radius: 5px;
             padding: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -110,7 +104,7 @@
 
         .news-badge {
             background-color: #ffffff; /* White background */
-            color: var(--purple); /* Purple text */
+            color: #45083adf; /* Dark gradient color */
             padding: 5px 10px;
             border-radius: 5px;
             margin-right: 10px;
@@ -124,14 +118,14 @@
             color: #ffffff; /* White text */
             font-weight: bold;
             padding: 8px 16px;
-            border: 1px solid #ccc;
+            border: 1px solid #45083adf; /* Match the purple color */
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
         }
 
         .news-cta a:hover {
             background-color: #ffffff; /* White background on hover */
-            color: var(--purple); /* Purple text on hover */
+            color: #45083adf; /* Dark gradient text on hover */
         }
 
         /* Arrow at the bottom of the balloon */
@@ -142,7 +136,7 @@
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-top: 10px solid var(--purple); /* Purple arrow */
+            border-top: 10px solid #45083adf; /* Match the purple color */
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
@@ -153,7 +147,7 @@
             padding: 20px;
             margin: 20px auto;
             max-width: 1200px;
-            background-color: #000000; /* Black background for announcements */
+            background-color: #000000; /* Black background */
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             color: white;
@@ -177,37 +171,35 @@
 </head>
 <body>
     <div class="bg"></div>
-
     <nav>
         <a href="Admin.html" class="active"><ion-icon name="home"></ion-icon></a>
+        <br>
         <a href="map1.html"><i class="fa-solid fa-map"></i></a>
+        <br>
         <a href="Charts.html"><i class="fa-solid fa-line-chart"></i></a>
+        <br>
         <a href="announcements.html" style="font-size: 1.4rem"><i class="fa-solid fa-bullhorn"></i></a>
+        <br>
         <a href="storage.html"><i class="fa-solid fa-warehouse"></i></a>
+        <br>
         <a href="newacc.html"><i class="fa-solid fa-user-plus"></i></a>
         <div class="navspacer"></div>
         <a href="login.html"><i class="fa-solid fa-sign-out"></i></a>
     </nav>
 
-    <div>
-        <div class="news-bar">
-            <div class="news-inner">
-                <p class="news-text"><span class="news-badge">New!</span> Latest announcements!</p>
-                <p class="news-cta">
-                    <a href="Admin.html">Go Home</a>
-                </p>
-            </div>
-        </div>
-
-        <div id="announcementsContainer">
-            <!-- Announcements content will go here -->
+    <div class="news-bar">
+        <div class="news-inner">
+            <p class="news-text"><span class="news-badge">New!</span> Latest announcements!</p>
+            <p class="news-cta">
+                <a href="Admin.html">Go Home</a>
+            </p>
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="https://kit.fontawesome.com/e267099c50.js" crossorigin="anonymous"></script>
+    <div id="announcementsContainer">
+        <!-- Announcements content will go here -->
+    </div>
+
     <script src="admin-script.js"></script>
     <script src="display-script.js"></script>
 </body>
