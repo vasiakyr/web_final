@@ -1,60 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Announcements</title>
-  <link rel="stylesheet" href="announcements.css">
-  <script>
-    // JavaScript to save announcement data to Local Storage
-    function saveAnnouncement(event) {
-      event.preventDefault(); // Prevent form submission
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    <title>Announcements</title>
+    <style>
+        nav > .navspacer { flex-grow: 1; }
 
-      // Get the title and content from the form
-      const title = document.getElementById('announcementTitle').value;
-      const content = document.getElementById('announcementContent').value;
+        /* Styling for the news bar */
+        .news-bar {
+            position: relative;
+            background-color: var(--purple);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .news-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .news-text {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+        .news-badge {
+            background-color: #45083adf;
+            color: var(--purple);
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .news-cta a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .news-cta a:hover {
+            background-color: #9e2222;
+            color: var(--purple);
+        }
+        .news-bar::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 10px solid var(--purple);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #announcementsContainer {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: #f3e5f5; /* Light purple background */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-      if (title && content) {
-        // Create an announcement object
-        const announcement = { title, content };
+        /* Styles for individual announcements */
+        .announcement {
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+        .announcement-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .announcement-text {
+            font-size: 16px;
+            line-height: 1.5;
+        }
 
-        // Get existing announcements from Local Storage
-        let announcements = JSON.parse(localStorage.getItem('announcements')) || [];
+        /* Styles for buttons */
+        button {
+            background: #800080; /* Purple color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-        // Add the new announcement to the list
-        announcements.push(announcement);
+        button:hover {
+            background-color: #6a006a; /* Darker purple shade on hover */
+        }
 
-        // Save the updated list back to Local Storage
-        localStorage.setItem('announcements', JSON.stringify(announcements));
-
-        // Clear the form fields
-        document.getElementById('announcementForm').reset();
-
-        // Alert the user that the announcement has been saved
-        alert('Announcement saved!');
-      } else {
-        alert('Please fill in both fields.');
-      }
-    }
-  </script>
+        /* Specific style for the help button */
+        #helpButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-  <div class="news-bar">
-    <div class="news-inner">
-      <p class="news-text"><span class="news-badge"></span> Here you add announcements!</p>
-      <p class="news-cta">
-        <a href="first page.html">Home</a>
-        <a href="announcements.html">View Announcements</a> <!-- Link to the page to view announcements -->
-      </p>
+    <div class="bg"></div>
+    <nav>
+        <a href="Admin.html" class="active"><ion-icon name="home"></ion-icon></a>
+        <a href="map1.html"><i class="fa-solid fa-map"></i></a>
+        <a href="Charts.html"><i class="fa-solid fa-line-chart"></i></a>
+        <a href="announcements.html" style="font-size: 1.4rem"><i class="fa-solid fa-bullhorn"></i></a>
+        <a href="storage.html"><i class="fa-solid fa-warehouse"></i></a>
+        <a href="newacc.html"><i class="fa-solid fa-user-plus"></i></a>
+        <div class="navspacer"></div>
+        <a href="login.html"><i class="fa-solid fa-sign-out"></i></a>
+    </nav>
+    <div>
+        <div class="news-bar">
+            <div class="news-inner">
+                <p class="news-text"><span class="news-badge">Add what's new</span> 
+                   Update people with the latest announcements!</p>
+                <p class="news-cta">
+                    <a href="Admin.html">Go Home</a>
+                </p>
+            </div>
+        </div>
+        <div id="announcementsContainer">
+            <!-- Announcements content will go here -->
+        </div>
+        <form id="announcementForm">
+            <label for="announcementTitle">Title:</label><br>
+            <input type="text" id="announcementTitle" required><br><br>
+            <label for="announcementText">Announcement:</label><br>
+            <textarea id="announcementText" rows="4" cols="50" required></textarea><br><br>
+            <button type="submit">Add Announcement</button>
+        </form>
     </div>
-  </div>
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/e267099c50.js" crossorigin="anonymous"></script>
+    <script src="admin-script.js"></script>
+    <script src="display-script.js"></script>
+    <script>
+        // Load announcements from localStorage on page load
+        window.onload = function() {
+            const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
+            const announcementsContainer = document.getElementById('announcementsContainer');
 
-  <form id="announcementForm" onsubmit="saveAnnouncement(event)">
-    <label for="announcementTitle">Title:</label>
-    <input type="text" id="announcementTitle" required><br>
-    <label for="announcementContent">Content:</label><br>
-    <textarea id="announcementContent" rows="4" cols="50" required></textarea><br>
-    <button type="submit">Submit</button>
-  </form>
+            storedAnnouncements.forEach(function(announcement) {
+                const announcementElement = document.createElement('div');
+                announcementElement.className = 'announcement';
+
+                const titleElement = document.createElement('p');
+                titleElement.className = 'announcement-title';
+                titleElement.textContent = announcement.title;
+
+                const textElement = document.createElement('p');
+                textElement.className = 'announcement-text';
+                textElement.textContent = announcement.text;
+
+                announcementElement.appendChild(titleElement);
+                announcementElement.appendChild(textElement);
+                announcementsContainer.appendChild(announcementElement);
+            });
+        };
+
+        // Event listener for form submission
+        document.getElementById('announcementForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get the announcement title and text
+            const announcementTitle = document.getElementById('announcementTitle').value;
+            const announcementText = document.getElementById('announcementText').value;
+
+            // Add to local storage
+            const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
+            storedAnnouncements.push({ title: announcementTitle, text: announcementText });
+            localStorage.setItem('announcements', JSON.stringify(storedAnnouncements));
+
+            // Create a new announcement element
+            const announcementElement = document.createElement('div');
+            announcementElement.className = 'announcement';
+
+            const titleElement = document.createElement('p');
+            titleElement.className = 'announcement-title';
+            titleElement.textContent = announcementTitle;
+
+            const textElement = document.createElement('p');
+            textElement.className = 'announcement-text';
+            textElement.textContent = announcementText;
+
+            announcementElement.appendChild(titleElement);
+            announcementElement.appendChild(textElement);
+
+            // Append the new announcement to the announcements container
+            document.getElementById('announcementsContainer').appendChild(announcementElement);
+
+            // Clear the input fields
+            document.getElementById('announcementTitle').value = '';
+            document.getElementById('announcementText').value = '';
+        });
+    </script>
 </body>
 </html>
