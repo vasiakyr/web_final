@@ -82,6 +82,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             color: black;
+            position: relative;
         }
         .announcement-title {
             font-size: 18px;
@@ -108,15 +109,21 @@
             background-color: #6a006a; /* Darker purple shade on hover */
         }
 
-        /* Specific style for the help button */
-        #helpButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
+        /* Style for delete button */
+        .delete-button {
+            background-color: #e74c3c; /* Red color */
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b; /* Darker red shade on hover */
         }
     </style>
 </head>
@@ -166,7 +173,7 @@
             const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
             const announcementsContainer = document.getElementById('announcementsContainer');
 
-            storedAnnouncements.forEach(function(announcement) {
+            storedAnnouncements.forEach(function(announcement, index) {
                 const announcementElement = document.createElement('div');
                 announcementElement.className = 'announcement';
 
@@ -178,8 +185,22 @@
                 textElement.className = 'announcement-text';
                 textElement.textContent = announcement.text;
 
+                // Create and add delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function() {
+                    // Remove announcement from localStorage
+                    storedAnnouncements.splice(index, 1);
+                    localStorage.setItem('announcements', JSON.stringify(storedAnnouncements));
+                    
+                    // Remove announcement from the DOM
+                    announcementsContainer.removeChild(announcementElement);
+                };
+
                 announcementElement.appendChild(titleElement);
                 announcementElement.appendChild(textElement);
+                announcementElement.appendChild(deleteButton);
                 announcementsContainer.appendChild(announcementElement);
             });
         };
@@ -209,8 +230,26 @@
             textElement.className = 'announcement-text';
             textElement.textContent = announcementText;
 
+            // Create and add delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function() {
+                // Remove announcement from localStorage
+                const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
+                const index = storedAnnouncements.findIndex(ann => ann.title === announcementTitle && ann.text === announcementText);
+                if (index !== -1) {
+                    storedAnnouncements.splice(index, 1);
+                    localStorage.setItem('announcements', JSON.stringify(storedAnnouncements));
+                    
+                    // Remove announcement from the DOM
+                    announcementElement.remove();
+                }
+            };
+
             announcementElement.appendChild(titleElement);
             announcementElement.appendChild(textElement);
+            announcementElement.appendChild(deleteButton);
 
             // Append the new announcement to the announcements container
             document.getElementById('announcementsContainer').appendChild(announcementElement);
