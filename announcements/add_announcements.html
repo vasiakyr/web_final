@@ -8,7 +8,7 @@
     <style>
         nav > .navspacer { flex-grow: 1; }
 
-        /* Styling for the news bar */
+        /* στυλ για μπαρα ειδοποιήσεων */
         .news-bar {
             position: relative;
             background-color: var(--purple);
@@ -74,7 +74,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles for individual announcements */
+        /* στυλ για μεμονομενες ανακοινωσεις */
         .announcement {
             background-color: #ffffff;
             margin-bottom: 20px;
@@ -94,7 +94,7 @@
             line-height: 1.5;
         }
 
-        /* Styles for buttons */
+        /* στυλ για τα κουμπια */
         button {
             background: #800080; /* Purple color */
             color: white;
@@ -109,7 +109,7 @@
             background-color: #6a006a; /* Darker purple shade on hover */
         }
 
-        /* Style for delete button */
+        /* για κουμπι διαγραφης */
         .delete-button {
             background-color: #e74c3c; /* Red color */
             color: white;
@@ -130,6 +130,7 @@
 <body>
     <div class="bg"></div>
     <nav>
+        <!-- το μενου αριστερα -->
         <a href="Admin.html" class="active"><ion-icon name="home"></ion-icon></a>
         <a href="map1.html"><i class="fa-solid fa-map"></i></a>
         <a href="Charts.html"><i class="fa-solid fa-line-chart"></i></a>
@@ -139,6 +140,7 @@
         <div class="navspacer"></div>
         <a href="login.html"><i class="fa-solid fa-sign-out"></i></a>
     </nav>
+    
     <div>
         <div class="news-bar">
             <div class="news-inner">
@@ -150,7 +152,7 @@
             </div>
         </div>
         <div id="announcementsContainer">
-            <!-- Announcements content will go here -->
+            <!-- εδω θα προσθετω τις ανακοινωσεις -->
         </div>
         <form id="announcementForm">
             <label for="announcementTitle">Title:</label><br>
@@ -168,7 +170,8 @@
     <script src="admin-script.js"></script>
     <script src="display-script.js"></script>
     <script>
-        // Load announcements from localStorage on page load
+        // javascript για την φορτωση ανακοινώσεων στη σελιδα απο το localStorage
+        // φορτωνει τις ανακοινωσεις απο το localStorage οταν ανοιγω τη σελιδα
         window.onload = function() {
             const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
             const announcementsContainer = document.getElementById('announcementsContainer');
@@ -185,16 +188,16 @@
                 textElement.className = 'announcement-text';
                 textElement.textContent = announcement.text;
 
-                // Create and add delete button
+                // φτιαχνω κουμπι διαγραφης
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'delete-button';
                 deleteButton.textContent = 'Delete';
                 deleteButton.onclick = function() {
-                    // Remove announcement from localStorage
+                    // διαγραφω ανακοινωση απο το  localStorage
                     storedAnnouncements.splice(index, 1);
                     localStorage.setItem('announcements', JSON.stringify(storedAnnouncements));
                     
-                    // Remove announcement from the DOM
+                    // διαγραφη ανακοινωσης
                     announcementsContainer.removeChild(announcementElement);
                 };
 
@@ -204,21 +207,21 @@
                 announcementsContainer.appendChild(announcementElement);
             });
         };
-
-        // Event listener for form submission
+ // javascript για την δημιουργια ανακοινώσεων , δινεται φορμα και ο χρηστης προσθετει οτι θελει 
+        // εδω θα προσθετω ανακοινωση
         document.getElementById('announcementForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Get the announcement title and text
+            // εδω ζηταει να βαλουμε τιτλο και την ανακοινωση
             const announcementTitle = document.getElementById('announcementTitle').value;
             const announcementText = document.getElementById('announcementText').value;
 
-            // Add to local storage
+            // προσθήκη στο local storage
             const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
             storedAnnouncements.push({ title: announcementTitle, text: announcementText });
             localStorage.setItem('announcements', JSON.stringify(storedAnnouncements));
 
-            // Create a new announcement element
+            // δημιουργια στοιχειου ανακοινωσης
             const announcementElement = document.createElement('div');
             announcementElement.className = 'announcement';
 
@@ -230,19 +233,19 @@
             textElement.className = 'announcement-text';
             textElement.textContent = announcementText;
 
-            // Create and add delete button
+            // κουμπι για την προσθηκη και διαγραφη
             const deleteButton = document.createElement('button');
             deleteButton.className = 'delete-button';
             deleteButton.textContent = 'Delete';
             deleteButton.onclick = function() {
-                // Remove announcement from localStorage
+                // αφαιρεσαι απο  localStorage
                 const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
                 const index = storedAnnouncements.findIndex(ann => ann.title === announcementTitle && ann.text === announcementText);
                 if (index !== -1) {
                     storedAnnouncements.splice(index, 1);
                     localStorage.setItem('announcements', JSON.stringify(storedAnnouncements));
                     
-                    // Remove announcement from the DOM
+                    //αφαιρεσαι ανακοινωση
                     announcementElement.remove();
                 }
             };
@@ -251,10 +254,10 @@
             announcementElement.appendChild(textElement);
             announcementElement.appendChild(deleteButton);
 
-            // Append the new announcement to the announcements container
+            // βαζει την ανακοινωση στο container ανακοινώσεων
             document.getElementById('announcementsContainer').appendChild(announcementElement);
 
-            // Clear the input fields
+            // καθαρισε τα input fields
             document.getElementById('announcementTitle').value = '';
             document.getElementById('announcementText').value = '';
         });
