@@ -8,7 +8,7 @@
     <style>
         nav > .navspacer { flex-grow: 1; }
 
-        /* Styling for the news bar */
+       /* στυλ για μπαρα ειδοποιήσεων */
         .news-bar {
             position: relative;
             background-color: var(--purple);
@@ -74,7 +74,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles for individual announcements */
+        /* στυλ για μεμονομενες ανακοινωσεις */
         .announcement {
             background-color: #ffffff;
             margin-bottom: 20px;
@@ -93,7 +93,7 @@
             line-height: 1.5;
         }
 
-        /* Styles for buttons */
+         /* στυλ για τα κουμπια */
         button {
             background: #800080; /* Purple color */
             color: white;
@@ -108,7 +108,7 @@
             background-color: #6a006a; /* Darker purple shade on hover */
         }
 
-        /* Specific style for the help button */
+         /* στυλ για τα κουμπια διαγραφης*/
         #helpButton {
             position: fixed;
             bottom: 20px;
@@ -153,7 +153,8 @@
     <script src="admin-script.js"></script>
     <script src="display-script.js"></script>
     <script>
-        // Load announcements from localStorage on page load
+       // javascript για την φορτωση ανακοινώσεων στη σελιδα απο το localStorage
+        // φορτωνει τις ανακοινωσεις απο το localStorage οταν ανοιγω τη σελιδα
         window.onload = function() {
             const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
             const announcementsContainer = document.getElementById('announcementsContainer');
