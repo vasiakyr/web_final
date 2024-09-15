@@ -260,15 +260,23 @@ function handleTask(taskId, taskType, taskCoords) {
       }
   }; 
   
-  // Εμπόδισε τον rescuer να μεταφερθεί σε απόσταση μεγαλύτερη των 5χλμ απο την βάση
-      rescuerMarker.on('moveend', function (e) {
-          const newCoords = e.target.getLatLng();
-          if (!isWithinDistance(newCoords.lat, newCoords.lng, baseLocation[0], baseLocation[1], maxDistance)) {
-              alert("You cannot move further than 5 km from the base!");
-              rescuerMarker.setLatLng(baseLocation); // Επανέφερέ τον στην βάση 
-          }
-      });
+
+
 }
+
+// Εμπόδισε τον rescuer να μεταφερθεί σε απόσταση μεγαλύτερη των 5χλμ απο την βάση
+rescuerMarker.on('moveend', function (e) {
+    const rescuerLatLng = rescuerMarker.getLatLng();
+    const baseLatLng = L.latLng(baseLocation[0], baseLocation[1]);
+    const maxAllowedDistancefromBase = 5000; 
+    // Έλεγξε την απόσταση μεταξύ του rescuer και της βάσης
+    const distance = rescuerLatLng.distanceTo(baseLatLng);  // Απόσταση σε μέτρα
+
+    if (distance > maxAllowedDistancefromBase) {  // Έλεγχος για απόσταση μεγαλύτερη των 5χλμ (5000 μέτρα)
+        alert("You cannot move further than 5 km from the base!");
+        rescuerMarker.setLatLng(baseLatLng); // Επανέφερε τον marker στην βάση
+    }
+});
 
 // Έλεγχος απόστασης του rescuer απο την βάση προτού πάει στην σελίδα το car 
  document.getElementById('car-link').addEventListener('click', (event) => {
