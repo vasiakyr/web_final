@@ -163,27 +163,36 @@
         // φορτωνει τις ανακοινωσεις απο το localStorage οταν ανοιγω τη σελιδα
         // το localStorage βρίσκεται τοπικά στον υπολογιστή και κρατάει τις ανακοινώσεις που προστίθενται κάθε φορά
         
+        
         window.onload = function() {
+            //παίρνει τις αποθηκευμένες ανακοινώσεις απο localStorage
             const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
+            //βρίσκει που θα τις τοποθετήσει
             const announcementsContainer = document.getElementById('announcementsContainer');
-
+            
+            //κοιτάει αν υπάρχουν αποθηκευμένες ανακοινώσεις ή μήνυμα οτι δεν έχω
             if (storedAnnouncements.length === 0) {
                 announcementsContainer.innerHTML = '<p>No announcements to display.</p>';
                 return;
             }
 
+            // πάει στη λίστα των ανακοινώσεων , δημιουργεί dιv για κάθε ανακοίνωση, και css
             storedAnnouncements.forEach(function(announcement) {
                 const announcementElement = document.createElement('div');
                 announcementElement.className = 'announcement';
-
+                 
+                //δημιουργεί τίτλο πως θα είναι 
                 const titleElement = document.createElement('p');
                 titleElement.className = 'announcement-title';
                 titleElement.textContent = announcement.title;
-
+                
+                //δημιουργεί κείμενο πως θα είναι (αλλάζω το title με text)
                 const textElement = document.createElement('p');
                 textElement.className = 'announcement-text';
                 textElement.textContent = announcement.text;
+                
 
+                //τα div από πριν πάνε εδώ για να εμφανιστούν στη σελίδα ανακοινώσεων
                 announcementElement.appendChild(titleElement);
                 announcementElement.appendChild(textElement);
                 announcementsContainer.appendChild(announcementElement);
