@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="menu.css">
-    <title>Announcements</title>
+    <title>Ανακοινώσεις</title>
     <style>
         nav > .navspacer { flex-grow: 1; }
 
@@ -69,7 +69,7 @@
             padding: 20px;
             margin: 20px auto;
             max-width: 1200px;
-            background-color: #f3e5f5; /* Light purple background */
+            background-color: #f3e5f5; 
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -96,7 +96,7 @@
 
         /* στυλ για τα κουμπια */
         button {
-            background: #800080; /* Purple color */
+            background: #800080; 
             color: white;
             padding: 10px 20px;
             border: none;
@@ -106,12 +106,12 @@
         }
 
         button:hover {
-            background-color: #6a006a; /* Darker purple shade on hover */
+            background-color: #6a006a; 
         }
 
         /* για κουμπι διαγραφης */
         .delete-button {
-            background-color: #e74c3c; /* Red color */
+            background-color: #e74c3c; 
             color: white;
             position: absolute;
             top: 10px;
@@ -123,7 +123,7 @@
         }
 
         .delete-button:hover {
-            background-color: #c0392b; /* Darker red shade on hover */
+            background-color: #c0392b; 
         }
     </style>
 </head>
@@ -144,10 +144,10 @@
     <div>
         <div class="news-bar">
             <div class="news-inner">
-                <p class="news-text"><span class="news-badge">Add what's new</span> 
-                   Update people with the latest announcements!</p>
+                <p class="news-text"><span class="news-badge">Ανάρτησε κάτι καινούργιο</span> 
+                   Ενημέρωσε τους πολίτες με τα τελευταία νέα!</p>
                 <p class="news-cta">
-                    <a href="Admin.html">Go Home</a>
+                    <a href="Admin.html">Σπίτι</a>
                 </p>
             </div>
         </div>
@@ -155,11 +155,11 @@
             <!-- εδω θα προσθετω τις ανακοινωσεις -->
         </div>
         <form id="announcementForm">
-            <label for="announcementTitle">Title:</label><br>
+            <label for="announcementTitle">Τίτλος ανακοίνωσης:</label><br>
             <input type="text" id="announcementTitle" required><br><br>
-            <label for="announcementText">Announcement:</label><br>
+            <label for="announcementText">Πρόσθεσε ανακοίνωση:</label><br>
             <textarea id="announcementText" rows="4" cols="50" required></textarea><br><br>
-            <button type="submit">Add Announcement</button>
+            <button type="submit">Καταχώρησε</button>
         </form>
     </div>
     
@@ -172,6 +172,7 @@
     <script>
         // javascript για την φορτωση ανακοινώσεων στη σελιδα απο το localStorage
         // φορτωνει τις ανακοινωσεις απο το localStorage οταν ανοιγω τη σελιδα
+        //const σταθερές μεταβλητές , η τιμή τους δεν αλλάζει
         window.onload = function() {
             const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
             const announcementsContainer = document.getElementById('announcementsContainer');
@@ -233,7 +234,7 @@
             textElement.className = 'announcement-text';
             textElement.textContent = announcementText;
 
-            // κουμπι για την προσθηκη και διαγραφη
+            // κουμπι για την  διαγραφη
             const deleteButton = document.createElement('button');
             deleteButton.className = 'delete-button';
             deleteButton.textContent = 'Delete';
