@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Map</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    <link rel="stylesheet" type="text/css" href="map_admin.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/e267099c50.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="bg"></div>
+    <nav>
+        <a href="Admin.html" class="active"><ion-icon name="home"></ion-icon></a>
+        <br>
+        <a href="map1.html"><i class="fa-solid fa-map"></i></a>
+        <br>
+        <a href="Charts.html"><i class="fa-solid fa-line-chart"></i></a>
+        <br>
+        <a href="NewAnnouncements.php" style="font-size: 1.4rem"><i class="fa-solid fa-bullhorn"></i></a>
+        <br>
+        <a href="storage.html"><i class="fa-solid fa-warehouse"></i></a>
+        <br>
+        <a href="newacc.html"><i class="fa-solid fa-user-plus"></i></a>
+        <div class="navspacer"></div>
+        <a href="login.html"><i class="fa-solid fa-sign-out"></i></a>
+    </nav>
+    <div class="bd">
+        <!-- Map container -->
+        <div id="map"></div>
+
+        <!-- Toggle buttons for filters -->
+        <div class="filter-buttons">
+            <button onclick="showMarkers(requestsTakenMarkers)">Requests Taken (Yellow)</button>
+            <button onclick="showMarkers(requestsPendingMarkers)">Requests Pending (Green)</button>
+            <button onclick="showMarkers(offersTakenMarkers)">Offers Taken (Purple)</button>
+            <button onclick="showMarkers(offersPendingMarkers)">Offers Pending (Red)</button>
+            <button onclick="showMarkers(vehicleMarkers)">Vehicles (Blue)</button>
+        </div>
+
+        <!-- Marker info table -->
+        <table id="markerInfoTable">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody id="markerInfoBody">
+                <!-- Marker information will be dynamically added here -->
+            </tbody>
+        </table>
+        <!-- Confirmation modal -->
+        <div id="confirmationModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <p>Are you sure about the new location?</p>
+                <button id="confirmYes">Yes</button>
+                <button id="confirmNo">No</button>
+            </div>
+        </div>
+    </div>
+    
+       <script src="map_admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rescuer Map - Patras, Greece</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    <link rel="stylesheet" type="text/css" href="map_rescuer.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/e267099c50.js" crossorigin="anonymous"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <nav>
+        <a href="rescuer.html" class="active"><ion-icon name="home"></ion-icon></a>
+        <a href="car.html" id="car-link"><i class="fa-solid fa-car"></i></a> <!-- ID added to car link -->
+        <a href="tasks.html" style="font-size: 1.4rem"><i class="fa-solid fa-t"></i></a>
+        <div class="navspacer"></div>
+        <a href="login.html"><i class="fa-solid fa-sign-out"></i></a>
+    </nav>
+
+    <div id="map"></div>
+
+    <!-- Το πλαίσιο που εμφανίζεται κάτω απο τον χάρτη -->
+    <div id="task-info-box">
+        <h3>Task Information</h3>
+        <p><strong>Task Type:</strong></p>
+        <p><strong>Name:</strong></p>
+        <p><strong>Phone:</strong></p>
+        <p><strong>Date:</strong></p>
+        <p><strong>Type:</strong></p>
+        <p><strong>Quantity:</strong></p>
+        <button id="cancel-task-btn">Cancel Task</button>
+        <button id="complete-task-btn">Complete Task</button>
+    </div>
+    
+    <script src="map_rescuer.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/e267099c50.js" crossorigin="anonymous"></script>
+</body>
+</html>
