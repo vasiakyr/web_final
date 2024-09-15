@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="menu.css">
-    <title>View Announcements</title>
+    <title>ΔΕΙΤΕ ΤΙΣ ΑΝΑΚΟΙΝΩΣΕΙΣ</title>
     <style>
+        /* Στο κώδικα για τη css παρακάτω δημιουργούνται τα κουτιά στη σωστή θέση */
         nav > .navspacer { flex-grow: 1; }
 
        /* στυλ για μπαρα ειδοποιήσεων */
@@ -20,6 +21,7 @@
             max-width: 1200px;
             margin: 20px auto;
         }
+        /* εσωτερικό μπάρας οριζοντια και στη μέση*/
         .news-inner {
             display: flex;
             justify-content: space-between;
@@ -31,6 +33,7 @@
             line-height: 1.6;
             color: #ffffff;
         }
+        /*για το φόντο*/
         .news-badge {
             background-color: #45083adf;
             color: var(--purple);
@@ -40,6 +43,7 @@
             font-weight: bold;
             font-size: 14px;
         }
+        /*όταν βάζω πάνω το ποντίκι αλλάζει χρώμα*/
         .news-cta a {
             text-decoration: none;
             color: #ffffff;
@@ -123,22 +127,24 @@
 <body>
     <div class="bg"></div>
     <nav>
-        <a href="Admin.html" class="active"><ion-icon name="home"></ion-icon></a>
-        <a href="map1.html"><i class="fa-solid fa-map"></i></a>
-        <a href="Charts.html"><i class="fa-solid fa-line-chart"></i></a>
+        <a href="citizen.php" class="active"><ion-icon name="home"></ion-icon></a>
+        <br>
+        <a href="Request.html"><i class="fas fa-hands-helping"></i></i></a>
+        <br>
         <a href="announcements.html" style="font-size: 1.4rem"><i class="fa-solid fa-bullhorn"></i></a>
-        <a href="storage.html"><i class="fa-solid fa-warehouse"></i></a>
-        <a href="newacc.html"><i class="fa-solid fa-user-plus"></i></a>
+        <br>
+        <br>
+
         <div class="navspacer"></div>
         <a href="login.html"><i class="fa-solid fa-sign-out"></i></a>
     </nav>
     <div>
         <div class="news-bar">
             <div class="news-inner">
-                <p class="news-text"><span class="news-badge">See what's new</span> 
-                   Update yourself with the latest announcements!</p>
+                <p class="news-text"><span class="news-badge">Δες τι νέο υπάρχει!</span> 
+                   Ενημερώσου με τα τελευταία νέα!</p>
                 <p class="news-cta">
-                    <a href="Admin.html">Go Home</a>
+                    <a href="Admin.html">Σπίτι</a>
                 </p>
             </div>
         </div>
@@ -155,6 +161,8 @@
     <script>
        // javascript για την φορτωση ανακοινώσεων στη σελιδα απο το localStorage
         // φορτωνει τις ανακοινωσεις απο το localStorage οταν ανοιγω τη σελιδα
+        // το localStorage βρίσκεται τοπικά στον υπολογιστή και κρατάει τις ανακοινώσεις που προστίθενται κάθε φορά
+        
         window.onload = function() {
             const storedAnnouncements = JSON.parse(localStorage.getItem('announcements')) || [];
             const announcementsContainer = document.getElementById('announcementsContainer');
