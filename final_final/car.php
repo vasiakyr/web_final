@@ -224,7 +224,7 @@ if (isset($_GET['fetch_car_table'])) {
     <link rel="stylesheet" type="text/css" href="menu.css">
     <a href="resquer.php" class="active"><ion-icon name="home"></ion-icon></a>
     <a href="car.php"><i class="fa-solid fa-car"></i></ion-icon></a>
-    <a href="map.html"><i class="fa-solid fa-map"></i></a>
+    <a href="map_rescuer.php"><i class="fa-solid fa-map"></i></a>
     <a href="task.php" style="font-size: 1.4rem"><i class="fa-solid fa-t"></i></a>
     <div class="navspacer"></div>
     <a href="login.html"><i class="fa-solid fa-sign-out"></i></ion-icon></a>
