@@ -234,34 +234,40 @@ function handleTask(taskId, taskType, taskCoords) {
 
 
 
-  // Λειτουργίες με το κουμπί Complete Task
-  document.getElementById('complete-task-btn').onclick = () => {
-      const rescuerLatLng = rescuerMarker.getLatLng();
-      const taskLatLng = L.latLng(taskCoords[0], taskCoords[1]);
+// Λειτουργίες με το κουμπί Complete Task
+document.getElementById('complete-task-btn').onclick = () => {
+    const rescuerLatLng = rescuerMarker.getLatLng();
+    const taskLatLng = L.latLng(taskCoords[0], taskCoords[1]);
 
-      // Έλεγξε την απόσταση μεταξύ του rescuer και ενος task που έχει αναλάβει
-      const distance = rescuerLatLng.distanceTo(taskLatLng);  // Απόσταση σε μέτρα
+    // Έλεγξε την απόσταση μεταξύ του rescuer και του task που έχει αναλάβει
+    const distance = rescuerLatLng.distanceTo(taskLatLng);  // Απόσταση σε μέτρα
 
-      if (distance <= 50) {
-          alert(`Task ${taskType} with ID ${taskId} completed!`);
-          // Κρύψε το πλαίσιο με τις πληροφορίες του task
-          taskInfoBox.style.display = 'none';
+    if (distance <= 50) {
+        alert(`Task ${taskType} with ID ${taskId} completed!`);
+        // Κρύψε το πλαίσιο με τις πληροφορίες του task
+        taskInfoBox.style.display = 'none';
 
-          // Αφαίρεσε το task και την γραμμή
-          if (taskType === 'request') {
-              map.removeLayer(markers[`request-${taskId}`]);
-          } else if (taskType === 'offer') {
-              map.removeLayer(markers[`offer-${taskId}`]);
-          }
-          currentTaskLines.forEach(line => map.removeLayer(line));  // Αφαίρεσε την γραμμή
+        // Αφαίρεσε το task και την γραμμή
+        if (taskType === 'request') {
+            map.removeLayer(markers[`request-${taskId}`]);
+            const taskIndex = requests.findIndex(req => req.id === taskId);
+            requests[taskIndex].takenOver = false; // Απελευθέρωσε το task
+        } else if (taskType === 'offer') {
+            map.removeLayer(markers[`offer-${taskId}`]);
+            const taskIndex = offers.findIndex(offer => offer.id === taskId);
+            offers[taskIndex].takenOver = false; // Απελευθέρωσε το task
+        }
 
-      } else {
-          alert(`You are too far away from the task! You must be within 50 meters to complete it.`);
-      }
-  }; 
-  
+        currentTaskLines.forEach(line => map.removeLayer(line));  // Αφαίρεσε την γραμμή
 
-
+        // Ενημέρωσε δυναμικά τον αριθμό των αναληφθέντων tasks
+        const takenOverCount = getTakenOverTasksCount();
+        console.log(`Updated takenOverCount: ${takenOverCount}`);
+        
+    } else {
+        alert(`You are too far away from the task! You must be within 50 meters to complete it.`);
+    }
+};
 }
 
 // Εμπόδισε τον rescuer να μεταφερθεί σε απόσταση μεγαλύτερη των 5χλμ απο την βάση
