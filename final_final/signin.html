@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Καινούρια Εγγραφή</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/e267099c50.js" crossorigin="anonymous"></script>
+    <style>
+           /* Add your CSS styles here */
+           #markerInfoTable {
+            display: none;
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #markerInfoTable th,
+        #markerInfoTable td {
+            border: 1px solid #a63232;
+            text-align: left;
+            padding: 8px;
+        }
+
+        #markerInfoTable th {
+            background-color: #32a64d;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+
+  <div class="login-box">
+    
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <h2>Καινούριος Χρήστης</h2>
+    <form name="form" action="signin.php" onsubmit="return isvalid() && matchPassword()" method="POST">
+      <div class="user-box">
+        <input type="text" name="fname" required>
+        <label>Όνομα</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="lname" required>
+        <label>Επίθετο</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="phone" id="phone" pattern="[0-9]{10}" title="phone number form should be 6907469740(no more than 10 numbers)" required>
+        <label>Τηλέφωνο</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="username" id="username">
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <input type="password" id="pass" name="pass" >
+        <label>Κωδικός</label>
+      </div>
+
+      <div class="user-box">
+        <input type="password" id="pass2" name="pass2" >
+        <label>Επανάληψη Κωδικού</label> 
+      </div>
+
+      <div class="user-box">
+        <input type="loc" id="loc" name="loc" >
+        <label>Τοποθεσία</label>
+      </div>
+    
+      <div class="user-box">
+        <select name="usertype" id="usertype">
+            <option name="volunt" value="Volunt">Εθελοντής</option>
+            <option name="civil" value="Civil">Πολίτης</option>
+        </select>
+      </div>
+      
+      <div class="user-box">
+        <input type="submit" id="submit" value="submit" name="submit"/>
+      </div>
+    </form>
+</div>
+
+
+<div id="message">
+    <h3>Password must contain the following:</h3>
+    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+    <p id="capital" class="invalid">A <b>uppercase</b> letter</p>
+    <p id="number" class="invalid">A <b>number</b></p>
+    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+</div>
+
+<script>
+var myInput = document.getElementById("pass");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+document.getElementById("message").style.display = "none";
+}
+
+
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+// Validate lowercase letters
+var lowerCaseLetters = /[a-z]/g;
+if(myInput.value.match(lowerCaseLetters)) {  
+letter.classList.remove("invalid");
+letter.classList.add("valid");
+} else {
+letter.classList.remove("valid");
+letter.classList.add("invalid");
+}
+
+// Validate capital letters
+var upperCaseLetters = /[A-Z]/g;
+if(myInput.value.match(upperCaseLetters)) {  
+capital.classList.remove("invalid");
+capital.classList.add("valid");
+} else {
+capital.classList.remove("valid");
+capital.classList.add("invalid");
+}
+
+// Validate numbers
+var numbers = /[0-9]/g;
+if(myInput.value.match(numbers)) {  
+number.classList.remove("invalid");
+number.classList.add("valid");
+} else {
+number.classList.remove("valid");
+number.classList.add("invalid");
+}
+
+// Validate length
+if(myInput.value.length >= 8) {
+length.classList.remove("invalid");
+length.classList.add("valid");
+} else {
+length.classList.remove("valid");
+length.classList.add("invalid");
+}
+}
+ 
+
+
+function isvalid() {
+    var uppercase = /[A-Z]/.test(document.form.pass.value);
+    var lowercase = /[a-z]/.test(document.form.pass.value);
+    var number = /\d/.test(document.form.pass.value);
+    var user = document.form.username.value;
+    var pass = document.form.pass.value;
+    var usertype = document.form.usertype.value;
+    var phone = document.form.phone.value;
+
+    if ((user.trim() == "") && (pass.trim() == "")) {
+        alert("Πεδία username και password είναι άδεια");
+        return false;
+    } else if (user.trim() == "") {
+        alert("Πεδίο username είναι άδειο");
+        return false;
+    } else if (pass.trim() == "") {
+        alert("Πεδίο password είναι άδειο");
+        return false;
+    }
+
+    // Note: Modify the following condition according to your password requirements
+    if (!(uppercase && lowercase && number && pass.length >= 8)) {
+        alert("Password should meet the specified criteria.");
+        return false;
+    }
+
+    if (phone.length < 10) {
+        alert("Phone should be of pattern 6905767674");
+        return false;
+    }
+
+    return true; // If all checks pass, allow form submission
+}
+
+
+  function matchPassword() {  
+    var pw1 = document.getElementById("pass").value;  
+    var pw2 = document.getElementById("pass2").value;  
+    if (pw1 !== pw2) {   
+      alert("Οι κωδικοί δεν ταιριάζουν");
+      return false; // Προλαμβάνει την υποβολή της φόρμας
+    } 
+    return true; // Επιτρέπει την υποβολή της φόρμας αν οι κωδικοί ταιριάζουν
+  }
+
+  </script>
+      </body>
+</html>
