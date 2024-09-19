@@ -182,6 +182,7 @@ echo "<script>
     ];
 
     // Δημιουργία γραφήματος με Chart.js
+        //βαζει τα χρωματα
     const ctx = document.getElementById('myChart').getContext('2d');
     let chart = new Chart(ctx, {
         type: 'line', // Είδος γραφήματος: Γραμμή
